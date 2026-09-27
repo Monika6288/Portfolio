@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monika M — Frontend Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAF7FD;
+    --bg-2:#F1E9FA;
+    --bg-3:#E9DEF6;
+    --text:#2E2350;
+    --text-soft:#6E6288;
+    --violet:#7C5CE0;
+    --violet-deep:#5B3FB8;
+    --gold:#B8791F;
+    --gold-bg:#E4A94A;
+    --line:#DCD0F0;
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'IBM Plex Sans', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  :focus-visible{outline:2px solid var(--gold); outline-offset:3px;}
+
+  .wrap{max-width:920px; margin:0 auto; padding:0 28px;}
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--violet-deep);
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(250,247,253,0.88);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-top:16px; padding-bottom:16px;
+  }
+  .nav-mark{font-family:var(--mono); font-size:0.85rem; color:var(--gold); letter-spacing:0.05em;}
+  .nav-links{display:flex; gap:26px; list-style:none; font-family:var(--mono); font-size:0.78rem;}
+  .nav-links a{text-decoration:none; color:var(--text); opacity:0.65; transition:opacity 0.2s;}
+  .nav-links a:hover{opacity:1; color:var(--violet-deep);}
+  @media (max-width:600px){ .nav-links{gap:14px; font-size:0.68rem;} }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:96px 0 80px;
+    position:relative;
+  }
+  .hero .eyebrow{margin-bottom:18px;}
+  .hero h1{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:clamp(2.6rem, 7vw, 4.6rem);
+    line-height:1.03;
+    letter-spacing:-0.01em;
+    color:var(--text);
+  }
+  .hero h1 span{color:var(--violet);}
+  .hero .role{
+    font-family:var(--display);
+    font-size:clamp(1.1rem, 2.6vw, 1.5rem);
+    color:var(--text-soft);
+    margin-top:14px;
+    font-weight:500;
+  }
+  .hero p.pitch{
+    max-width:560px;
+    margin-top:22px;
+    color:var(--text-soft);
+    font-size:1.02rem;
+  }
+  .hero .cta-row{display:flex; gap:14px; margin-top:34px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--mono);
+    font-size:0.82rem;
+    letter-spacing:0.03em;
+    padding:12px 22px;
+    border-radius:2px;
+    text-decoration:none;
+    display:inline-block;
+    transition:transform 0.15s ease, background 0.2s ease;
+  }
+  .btn-primary{background:var(--violet); color:#FAF7FD; font-weight:600;}
+  .btn-primary:hover{transform:translateY(-2px); background:var(--violet-deep);}
+  .btn-ghost{border:1px solid var(--line); color:var(--text);}
+  .btn-ghost:hover{border-color:var(--violet); color:var(--violet-deep);}
+
+  .pin-badge{
+    margin-top:44px;
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:var(--mono); font-size:0.75rem; color:var(--gold);
+  }
+  .pin-dot{
+    width:8px; height:8px; border-radius:50%; background:var(--gold-bg);
+    box-shadow:0 0 0 4px rgba(228,169,74,0.25);
+    animation:pulse 2.2s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{box-shadow:0 0 0 4px rgba(228,169,74,0.25);}
+    50%{box-shadow:0 0 0 8px rgba(228,169,74,0.1);}
+  }
+
+  /* ---------- SECTION LABELS ---------- */
+  section{padding:70px 0;}
+  .sec-head{margin-bottom:40px;}
+  .sec-head .eyebrow{margin-bottom:10px;}
+  .sec-head h2{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:clamp(1.5rem,3.4vw,2.1rem);
+    color:var(--text);
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about-body{
+    max-width:640px;
+    color:var(--text-soft);
+    font-size:1.02rem;
+  }
+  .about-body strong{color:var(--text); font-weight:600;}
+
+  /* ---------- SKILLS ---------- */
+  .legend{
+    border:1px solid var(--line);
+    border-radius:4px;
+    overflow:hidden;
+    background:var(--bg-2);
+  }
+  .legend-row{
+    display:grid;
+    grid-template-columns:180px 1fr;
+    border-bottom:1px solid var(--line);
+  }
+  .legend-row:last-child{border-bottom:none;}
+  .legend-key{
+    font-family:var(--mono);
+    font-size:0.72rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--violet-deep);
+    padding:16px 18px;
+    background:var(--bg-3);
+    display:flex; align-items:center;
+  }
+  .legend-val{
+    padding:16px 18px;
+    display:flex; flex-wrap:wrap; gap:8px;
+    align-items:center;
+  }
+  .tag{
+    font-family:var(--mono);
+    font-size:0.82rem;
+    color:var(--text);
+    background:var(--bg);
+    border:1px solid var(--line);
+    padding:5px 11px;
+    border-radius:2px;
+  }
+  @media (max-width:600px){
+    .legend-row{grid-template-columns:1fr;}
+    .legend-key{padding:12px 16px 6px;}
+  }
+
+  /* ---------- ROUTE (EXPERIENCE) ---------- */
+  .route{position:relative; padding-left:34px;}
+  .route-line{
+    position:absolute; left:5px; top:6px; bottom:6px; width:2px;
+    background:var(--line);
+  }
+  .route-fill{
+    position:absolute; left:5px; top:6px; width:2px;
+    background:linear-gradient(var(--violet), var(--gold-bg));
+    height:0%;
+    transition:height 0.1s linear;
+  }
+  .waypoint{position:relative; padding-bottom:48px;}
+  .waypoint:last-child{padding-bottom:0;}
+  .node{
+    position:absolute; left:-34px; top:4px;
+    width:12px; height:12px; border-radius:50%;
+    background:var(--bg); border:2px solid var(--text-soft);
+  }
+  .waypoint.active .node{border-color:var(--gold-bg); background:var(--gold-bg);}
+  .waypoint.past .node{border-color:var(--violet); background:var(--violet);}
+  .wp-time{
+    font-family:var(--mono); font-size:0.75rem; color:var(--gold);
+    letter-spacing:0.03em;
+  }
+  .waypoint.past .wp-time{color:var(--violet-deep);}
+  .wp-title{
+    font-family:var(--display); font-weight:600; font-size:1.15rem;
+    margin-top:5px; color:var(--text);
+  }
+  .wp-org{color:var(--text-soft); font-size:0.92rem; margin-top:2px;}
+  .wp-list{margin-top:12px; padding-left:18px; color:var(--text-soft); font-size:0.94rem;}
+  .wp-list li{margin-bottom:6px;}
+  .status-pill{
+    display:inline-block; margin-top:10px;
+    font-family:var(--mono); font-size:0.68rem; letter-spacing:0.05em;
+    text-transform:uppercase;
+    color:#FAF7FD; background:var(--gold);
+    padding:3px 9px; border-radius:2px;
+  }
+
+  /* ---------- PROJECTS ---------- */
+  .card{
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:26px 24px;
+    background:var(--bg-2);
+  }
+  .card h3{font-family:var(--display); font-size:1.15rem; font-weight:600; color:var(--text);}
+  .card p{color:var(--text-soft); margin-top:10px; font-size:0.95rem;}
+  .card ul{margin-top:12px; padding-left:18px; color:var(--text-soft); font-size:0.92rem;}
+  .card ul li{margin-bottom:5px;}
+  .stack-row{display:flex; gap:8px; flex-wrap:wrap; margin-top:16px;}
+
+  /* ---------- CERTIFICATIONS ---------- */
+  .cert-list{list-style:none;}
+  .cert-item{
+    display:flex; justify-content:space-between; gap:16px;
+    padding:14px 0; border-bottom:1px solid var(--line);
+    font-size:0.95rem; color:var(--text);
+  }
+  .cert-item:last-child{border-bottom:none;}
+  .cert-date{font-family:var(--mono); font-size:0.78rem; color:var(--violet-deep); white-space:nowrap;}
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  footer{
+    padding:80px 0 50px;
+    border-top:1px solid var(--line);
+  }
+  footer h2{
+    font-family:var(--display); font-weight:700;
+    font-size:clamp(1.8rem,5vw,2.6rem);
+    max-width:520px;
+    color:var(--text);
+  }
+  footer h2 span{color:var(--violet);}
+  .contact-grid{
+    margin-top:34px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+    gap:28px 24px;
+  }
+  .contact-item{
+    min-width:0;
+  }
+  .contact-item .eyebrow{margin-bottom:6px;}
+  .contact-item a, .contact-item span{
+    font-family:var(--mono); font-size:0.92rem;
+    text-decoration:none; color:var(--text);
+    word-break:break-word;
+    overflow-wrap:anywhere;
+  }
+  .contact-item a:hover{color:var(--violet-deep);}
+  .foot-note{
+    margin-top:56px; font-family:var(--mono); font-size:0.7rem; color:var(--text-soft);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="nav-mark">MONIKA M</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#route">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Namakkal, Tamil Nadu · B.E. CSE, Final Year</div>
+    <h1>Monika M<span>.</span></h1>
+    <div class="role">Frontend Developer | HTML, CSS, JavaScript &amp; Django</div>
+    <p class="pitch">Frontend Developer with professional experience working on ERP modules using HTML, CSS, JavaScript, and Django. Experienced in implementing interface logic, validations, conditions, and testing features against application requirements.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#route">View my experience</a>
+      <a class="btn btn-ghost" href="#contact">Get in touch</a>
+      <a class="btn btn-ghost" href="resume.pdf" download>Download Resume</a>
+    </div>
+    <div class="pin-badge"><span class="pin-dot"></span> Previously worked as a Frontend Developer at Mahe Software Solutions</div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">01 — About</div>
+      <h2>What I actually do day to day</h2>
+    </div>
+    <p class="about-body">
+      Frontend Developer with professional experience working on ERP modules using HTML, CSS, JavaScript, and Django. At Mahe Software Solutions, I contributed to the Task, Follow-up, and Tracking modules of the SaaSublimation ERP platform, working on frontend behavior, backend logic, validations, testing, and application data handling.
+      <br><br>
+      I also worked on integrating Google Maps into the Tracking module for location visualization. I developed a strong interest in understanding application flow, handling unexpected user input, testing features, and tracing issues through the application logic.
+    </p>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">02 — Skills</div>
+      <h2>Toolkit</h2>
+    </div>
+    <div class="legend">
+      <div class="legend-row">
+        <div class="legend-key">Frontend</div>
+        <div class="legend-val"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+      </div>
+      <div class="legend-row">
+        <div class="legend-key">Language</div>
+        <div class="legend-val"><span class="tag">Python</span></div>
+      </div>
+      <div class="legend-row">
+        <div class="legend-key">Framework</div>
+        <div class="legend-val"><span class="tag">Django</span></div>
+      </div>
+      <div class="legend-row">
+        <div class="legend-key">Databases</div>
+        <div class="legend-val"><span class="tag">MySQL</span><span class="tag">PostgreSQL</span></div>
+      </div>
+      <div class="legend-row">
+        <div class="legend-key">Tools</div>
+        <div class="legend-val"><span class="tag">VS Code</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="route">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">03 — Experience</div>
+      <h2>The route so far</h2>
+    </div>
+
+    <div class="route" id="route-track">
+      <div class="route-line"></div>
+      <div class="route-fill" id="route-fill"></div>
+
+      <div class="waypoint past">
+        <div class="node"></div>
+        <div class="wp-time">2022 — 2026</div>
+        <div class="wp-title">B.E. Computer Science and Engineering</div>
+        <div class="wp-org">Vivekanandha College of Technology for Women · 81%</div>
+      </div>
+
+      <div class="waypoint past">
+        <div class="node"></div>
+        <div class="wp-time">Jan 2026 — Apr 2026</div>
+        <div class="wp-title">Frontend Developer Intern</div>
+        <div class="wp-org">Mahe Software Solutions</div>
+        <ul class="wp-list">
+          <li>Learned Django fundamentals — models, views, URLs, templates — while contributing to a live ERP project under senior developers.</li>
+          <li>Built and modified web pages using HTML, CSS, and JavaScript on the SaaSublimation platform.</li>
+          <li>Got hands-on practice in testing, debugging, and basic database operations.</li>
+        </ul>
+      </div>
+
+      <div class="waypoint active">
+        <div class="node"></div>
+        <div class="wp-time">May 2026 — Present</div>
+        <div class="wp-title">Frontend Developer</div>
+        <div class="wp-org">Mahe Software Solutions</div>
+        <ul class="wp-list">
+          <li>Build and maintain UI components for the SaaSublimation ERP platform, translating business requirements into working, validated pages.</li>
+          <li>Work on the Task, Follow-up, and Tracking modules — handling frontend behavior and backend logic together.</li>
+          <li>Integrated Google Maps into the Tracking module for real-time location visualization.</li>
+          <li>Test application flow to catch bugs, especially around incorrect data storage and broken conditions.</li>
+          <li>Work directly with MySQL and PostgreSQL for application data handling.</li>
+        </ul>
+        <div class="status-pill">You are here</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">04 — Projects</div>
+      <h2>Built outside of work</h2>
+    </div>
+    <div class="card" style="margin-bottom:24px;">
+      <div class="eyebrow" style="margin-bottom:8px;">Professional Experience</div>
+      <h3>SaaSublimation ERP Platform</h3>
+      <p>A professional ERP platform where I contributed to frontend development while working at Mahe Software Solutions. I worked on the Task, Follow-up, and Tracking modules, implementing user interface behavior, validations, and application flows using HTML, CSS, JavaScript, and Django.</p>
+      <ul>
+        <li>Developed and modified frontend pages and UI components for ERP modules.</li>
+        <li>Worked on the Task, Follow-up, and Tracking modules based on application requirements.</li>
+        <li>Implemented frontend validations and JavaScript-based interface behavior.</li>
+        <li>Worked with Django views and URL routing as part of the application flow.</li>
+        <li>Contributed to the Tracking module by integrating Google Maps for location visualization.</li>
+        <li>Tested and debugged application behavior and data-related issues.</li>
+      </ul>
+      <div class="stack-row">
+        <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">Django</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Students Voice and Support System</h3>
+      <p>A web platform that gives students a structured way to submit feedback, concerns, and suggestions — instead of it getting lost in email or verbal complaints.</p>
+      <ul>
+        <li>Used Django to handle application logic, user data, and database operations.</li>
+        <li>Designed the interface in HTML/CSS to be simple enough that submitting a concern takes under a minute.</li>
+        <li>Added JavaScript form validation so incomplete or malformed submissions get caught before they reach the database.</li>
+        <li>Built functionality to track the status of a concern from submission through resolution.</li>
+      </ul>
+      <div class="stack-row">
+        <span class="tag">Django</span><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="certifications">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">05 — Certifications</div>
+      <h2>Learning, logged</h2>
+    </div>
+    <ul class="cert-list">
+      <li class="cert-item"><span>IBM SkillsBuild — Front End Web Development</span><span class="cert-date"></span></li>
+      <li class="cert-item"><span>IBM SkillsBuild — Artificial Intelligence Fundamentals</span><span class="cert-date"></span></li>
+      <li class="cert-item"><span>Infosys Springboard — Python</span><span class="cert-date"></span></li>
+      <li class="cert-item"><span>English Typewriting — Lower Grade</span><span class="cert-date"></span></li>
+      <li class="cert-item"><span>English Typewriting — Higher Grade</span><span class="cert-date"></span></li>
+    </ul>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="eyebrow">06 — Contact</div>
+    <h2>Next stop: <span>your team?</span></h2>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <div class="eyebrow">Email</div>
+        <a href="mailto:mmonikamatheswaran@gmail.com">mmonikamatheswaran@gmail.com</a>
+      </div>
+      <div class="contact-item">
+        <div class="eyebrow">Phone</div>
+        <a href="tel:+917708873788">+91 77088 73788</a>
+      </div>
+      <div class="contact-item">
+        <div class="eyebrow">LinkedIn</div>
+        <a href="https://linkedin.com/in/monika-m-90314429b" target="_blank" rel="noopener noreferrer">https://linkedin.com/in/monika-m-90314429b</a>
+      </div>
+      <div class="contact-item">
+        <div class="eyebrow">GitHub</div>
+        <a href="https://github.com/Monika6288" target="_blank" rel="noopener noreferrer">https://github.com/Monika6288</a>
+      </div>
+    </div>
+    <div class="foot-note">© 2026 Monika M. Built with HTML, CSS &amp; JavaScript.</div>
+  </div>
+</footer>
+
+<script>
+  // Route progress line: fills as the experience section scrolls into view
+  const track = document.getElementById('route-track');
+  const fill = document.getElementById('route-fill');
+
+  function updateRoute(){
+    const rect = track.getBoundingClientRect();
+    const vh = window.innerHeight;
+    const total = rect.height;
+    let progress = (vh * 0.75 - rect.top) / total;
+    progress = Math.max(0, Math.min(1, progress));
+    fill.style.height = (progress * 100) + '%';
+  }
+
+  window.addEventListener('scroll', updateRoute, {passive:true});
+  window.addEventListener('resize', updateRoute);
+  updateRoute();
+</script>
+
+</body>
+</html>
